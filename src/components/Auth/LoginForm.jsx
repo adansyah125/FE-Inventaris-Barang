@@ -25,19 +25,22 @@ const LoginForm = () => {
       // Simpan token & role user
       localStorage.setItem("token", token);
       localStorage.setItem("role", user.role);
+      localStorage.setItem("name", user.name);
 
       // Redirect sesuai role
-      if (user.role === "admin") {
-        navigate("/dashboard");
-      } else if (user.role === "kelurahan") {
-        navigate("/dashboard");
-      } else {
-        navigate("/dashboard");
-      }
+        // if (user.role === "admin") {
+        //   navigate("/dashboard");
+        // } else if (user.role === "kelurahan") {
+        //   navigate("/dashboard");
+        // } else {
+        //   navigate("/dashboard");
+        // }
+
+      navigate("/dashboard");
     } catch (err) {
-      toast.error("Terjadi kesalahan saat logout");
+      toast.error("Email atau password salah!");
       console.log(err);
-    }
+    } 
   };
 
   return (

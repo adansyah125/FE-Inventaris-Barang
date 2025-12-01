@@ -1,7 +1,7 @@
 // File: src/components/Layout/Sidebar.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MENU_ITEMS } from '../constants';
+import { MENU_ITEMS } from '../../data/constants';
 
 const Sidebar = ({ activeMenuId, onMenuItemClick, onLogout }) => {
   const navigate = useNavigate();
@@ -24,6 +24,9 @@ const Sidebar = ({ activeMenuId, onMenuItemClick, onLogout }) => {
         break;
       case 'user':
         navigate('/user');
+        break;
+      case 'AddData':
+        navigate('data-induk/tambah');
         break;
       default:
         navigate('/dashboard');

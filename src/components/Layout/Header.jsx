@@ -1,5 +1,5 @@
 import React from 'react';
-import { PRIMARY_COLOR, PRIMARY_COLOR_CODE } from '../constants';
+import { PRIMARY_COLOR, PRIMARY_COLOR_CODE } from '../../data/constants';
 
 const Header = ({ activeMenuLabel }) => (
     <div className="bg-white px-8 py-4 flex justify-between items-center shadow-sm sticky top-0 z-20 border-b border-gray-100">
@@ -9,8 +9,8 @@ const Header = ({ activeMenuLabel }) => (
         </div>
         <div className="flex items-center space-x-4">
             <div className="text-right">
-                <p className="font-semibold text-gray-800 text-sm">Administrator</p>
-                <p className="text-xs text-gray-500">Kecamatan</p>
+                <p className="font-semibold text-gray-800 text-sm">{localStorage.getItem("name")}</p>
+                <p className="text-xs text-gray-500">{localStorage.getItem("role")}</p>
             </div>
             <div className={`w-10 h-10 bg-${PRIMARY_COLOR}-500 rounded-full flex items-center justify-center text-white border-2 border-white shadow-md cursor-pointer transition duration-300`}>
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">

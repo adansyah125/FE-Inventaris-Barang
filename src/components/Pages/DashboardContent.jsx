@@ -1,12 +1,12 @@
 import React from 'react';
-import { getDashboardStats } from './utils';
-import { PRIMARY_COLOR } from '../constants';
+import { getDashboardStats } from '../../data/utils';
+import { PRIMARY_COLOR } from '../../data/constants';
 
 const DashboardContent = ({ dataItems }) => {
     const stats = getDashboardStats(dataItems);
     // Cari max value untuk skala chart, tambahkan buffer sedikit agar tidak mentok atas
     const maxValue = Math.max(...stats.kondisiData.map(d => d.value)) * 1.1;
-
+    
     return (
         <div className="w-full text-gray-800">
             

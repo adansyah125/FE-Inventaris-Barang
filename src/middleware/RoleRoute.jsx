@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-const RoleRoute = ({ children, role }) => {
-  const userRole = localStorage.getItem("role");
+const RoleRoute = ({ roles, userRole, children }) => {
+  const isAllowed = roles.includes(userRole);
 
-  if (userRole !== role) {
-    return <Navigate to="/dashboard" />;
+  useEffect(() => {
+    if (!isAllowed) {
+      toast.error("Maaf, Anda tidak dapat mengakses halaman ini");
+    }
+  }, [isAllowed]);
+
+  // Jika role tidak cocok → arahkan ke dashboard
+  if (!isAllowed) {
+    return <Navigate to="/dashboard" replace />;
   }
 
+  // Jika role cocok → tampilkan halaman
   return children;
 };
 

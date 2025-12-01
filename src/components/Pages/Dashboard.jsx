@@ -1,7 +1,7 @@
 // src/components/Dashboard/Dashboard.jsx
 import React, { useState } from 'react';
 
-import { MENU_ITEMS, BG_COLOR, PRIMARY_COLOR, MODES } from '../constants';
+import { MENU_ITEMS, BG_COLOR, PRIMARY_COLOR, MODES } from '../../data/constants';
 
 import Sidebar from '../Layout/Sidebar';
 import Header from '../Layout/Header';
@@ -9,6 +9,8 @@ import DashboardContent from './DashboardContent';
 import DataIndukContent from './KIB/KibContent';
 import LaporanKIRContent from './KIR/LaporanKIRContent';
 import PrintLabelsContent from './Label/PrintLabelsContent';
+import AddData from './KIB/addData';
+import AddDataKir from './KIR/addDataKir';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -86,6 +88,8 @@ const Dashboard = ({ initialMenuId = 'dashboard' }) => {
   const [dataItems, setDataItems] = useState(initialDataItems);
   const [activeMenuId, setActiveMenuId] = useState(initialMenuId);
 
+  
+
   const handleMenuClick = (id) => {
     setActiveMenuId(id);
   };
@@ -130,9 +134,12 @@ const Dashboard = ({ initialMenuId = 'dashboard' }) => {
             dataItems={dataItems}
           />
         );
+      case'AddData':
+        return <AddData dataItems={dataItems} />;
       case 'reports':
         return <LaporanKIRContent dataItems={dataItems} />;
-
+      case 'addDataKir':
+        return <AddDataKir dataItems={dataItems} />;
       case 'print_labels':
         // PrintLabelsContent nerima semua dataItems
         return <PrintLabelsContent dataItems={dataItems} />;
