@@ -103,7 +103,7 @@ const DashboardContent = ({ dataItems }) => {
                                         
                                         {/* The Bar */}
                                         <div 
-                                            className={`w-full  rounded-t-sm transition-all duration-500 relative
+                                            className={`w-full max-w-[80px] rounded-t-sm transition-all duration-500 relative
                                                 ${data.label === 'Baik' ? `bg-${PRIMARY_COLOR}-500 hover:bg-${PRIMARY_COLOR}-600` : 
                                                   data.label === 'Kurang Baik' ? 'bg-amber-400 hover:bg-amber-500' : 
                                                   'bg-rose-500 hover:bg-rose-600'}`}

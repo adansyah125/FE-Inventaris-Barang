@@ -13,6 +13,7 @@ const LaporanKIRContent = () => {
         fetchData();
     }, []);
 
+
     const fetchData = async () => {
         try {
             const response = await axios.get('http://localhost:8000/api/kir', 
@@ -21,7 +22,7 @@ const LaporanKIRContent = () => {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             }
-            ); // endpoint API Laravel
+            ); 
             
             setData(response.data.data); // pastikan response.data berupa array
         } catch (error) {

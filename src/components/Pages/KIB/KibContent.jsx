@@ -121,7 +121,7 @@ const DataIndukContent = () => {
                     {filter === item.key && (
                         <motion.span
                             layoutId="underline"
-                            className="absolute left-0 bg-indigo-600 w-full rounded-full"
+                            className="absolute left-0 -bottom-[2px] h-[2px] bg-indigo-600 w-full rounded-full"
                             transition={{ type: "spring", stiffness: 300, damping: 25 }}
                         />
                     )}

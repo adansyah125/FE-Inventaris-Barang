@@ -38,14 +38,21 @@ const Sidebar = ({ activeMenuId, onMenuItemClick, onLogout }) => {
       {/* BAGIAN ATAS: LOGO + MENU */}
       <div>
         {/* Logo / Judul Aplikasi */}
-        <div className="mb-6 px-2">
-          <p className="text-xs text-indigo-200 tracking-wide uppercase">
-            SIMBADA KEC. BANDUNG KIDUL
-          </p>
-          <p className="text-sm font-semibold text-white mt-1">
-            Inventaris Barang Daerah
+        <div className="mb-2 px-2 m-auto">
+           <img
+                    src="logo.png" // Placeholder: Logo Putih
+                    alt="Logo Bandung Kidul"
+                    className="w-20 h-20 rounded-full object-cover m-auto"
+                    onError={(e) => { 
+                      e.target.onerror = null; 
+                      e.target.src = "https://placehold.co/40x40/ffffff/1a1a4f?text=BK"; // Fallback ke Teks jika gambar gagal
+                    }}
+                />
+          <p className="text-xs font-semibold text-indigo-200 mt-1 uppercase  tracking-wide">
+            Simbada Bandung Kidul
           </p>
         </div>
+        <p>-----------------------------</p>
 
         {/* Menu */}
         <nav className="space-y-1">
