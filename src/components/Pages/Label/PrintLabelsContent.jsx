@@ -133,7 +133,7 @@ export default function CetakLabel() {
      <div className="w-full text-gray-800 print:hidden">
       {/* HEADER */}
       <h1 className="text-xl md:text-2xl font-bold mb-4">
-        🖨️ Cetak Label & Barcode Aset
+         Cetak Label & Barcode Aset
       </h1>
 
       {/* LAYOUT - Stack on mobile, side-by-side on desktop */}

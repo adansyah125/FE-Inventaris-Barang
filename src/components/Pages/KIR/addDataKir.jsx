@@ -260,6 +260,7 @@ function FormInput({ label, name, value, onChange, type = "text", step }) {
         step={step}
         onChange={onChange}
         className="mt-1 block w-full border rounded-md p-2 border-gray-200 shadow-sm "
+        required
       />
     </div>
   );

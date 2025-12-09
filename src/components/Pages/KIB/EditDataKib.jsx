@@ -7,6 +7,11 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 
 function EditData() {
+
+  const [oldImage, setOldImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState({});
   const { id } = useParams();
 
   const navigate = useNavigate();
@@ -36,9 +41,63 @@ function EditData() {
     gambar: null,
   });
 
-  const [oldImage, setOldImage] = useState(null);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [loading, setLoading] = useState(true);
+
+
+  const validateForm = () => {
+  const rules = {
+    kode_barang: "Kode barang wajib diisi",
+    nama_barang: "Nama barang wajib diisi",
+    type_kib: "Jenis KIB wajib dipilih",
+    jumlah: "Jumlah wajib diisi",
+    harga_satuan: "Harga satuan wajib diisi",
+    nilai_perolehan: "Nilai perolehan wajib diisi",
+    lokasi: "Lokasi ruangan wajib dipilih",
+    nibar: "NIBAR wajib diisi",
+    no_register: "Nomor register wajib diisi",
+    spesifikasi: "Spesifikasi wajib diisi",
+    status_penggunaan: "Status penggunaan wajib dipilih",
+    gambar: "Gambar wajib diupload"
+  };
+
+  // KIB khusus
+  const kibRules = {
+    tanah: {
+      ukuran: "Ukuran wajib diisi",
+      status_tanah: "Status tanah wajib diisi",
+      no_sertifikat: "Nomor sertifikat wajib diisi"
+    },
+    mesin: {
+      no_rangka: "No rangka wajib diisi",
+      no_mesin: "No mesin wajib diisi",
+      no_pabrik: "No pabrik wajib diisi"
+    },
+    gedung: {
+      kontruksi: "Konstruksi wajib diisi",
+      luas_lantai: "Luas lantai wajib diisi",
+      no_dokumen: "Dokumen wajib diisi"
+    }
+  };
+
+  let newErrors = {};
+
+  // Loop validasi default
+  for (let field in rules) {
+    if (!form[field] || !String(form[field]).trim()) {
+      newErrors[field] = rules[field];
+    }
+  }
+
+  // Loop validasi khusus KIB
+  if (form.type_kib && kibRules[form.type_kib]) {
+    for (let field in kibRules[form.type_kib]) {
+      if (!form[field] || !String(form[field]).trim()) {
+        newErrors[field] = kibRules[form.type_kib][field];
+      }
+    }
+  }
+
+  return newErrors;
+};
 
 
   useEffect(() => {
@@ -75,6 +134,13 @@ function EditData() {
       Object.entries(form).forEach(([key, value]) => {
         data.append(key, value);
       });
+       const newErrors = validateForm();
+      setErrors(newErrors);
+
+  if (Object.keys(newErrors).length > 0) {
+    toast.error("Periksa kembali data yang wajib diisi!");
+    return;
+  }
 
       data.append("_method", "PUT"); // untuk Laravel
 
@@ -126,8 +192,8 @@ function EditData() {
             {/* FORM GRID */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-              <FormInput label="Kode Barang" name="kode_barang" value={form.kode_barang} onChange={handleChange} />
-              <FormInput label="Nama Barang" name="nama_barang" value={form.nama_barang} onChange={handleChange} />
+              <FormInput label="Kode Barang" name="kode_barang" value={form.kode_barang} onChange={handleChange} required />
+              <FormInput label="Nama Barang" name="nama_barang" value={form.nama_barang} onChange={handleChange} required />
 
               <FormSelect
                 label="Jenis KIB"
@@ -172,7 +238,18 @@ function EditData() {
                 </div>
               )}
 
-              <FormInput label="Spesifikasi Tambahan" name="spesifikasi_tambahan" value={form.spesifikasi_tambahan} onChange={handleChange} />
+              {/* <FormInput label="Spesifikasi Tambahan" name="spesifikasi_tambahan" value={form.spesifikasi_tambahan} onChange={handleChange} /> */}
+               <div>
+              <label className="block text-sm font-medium text-gray-700">Spesifikasi Tambahan</label>
+              <input
+                name="spesifikasi_tambahan"
+                type="text"
+                value={form.spesifikasi_tambahan}
+                onChange={handleChange}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                placeholder="(Optional)"
+              ></input>
+            </div>
               <FormInput label="Lokasi" name="lokasi" value={form.lokasi} onChange={handleChange} />
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -263,6 +340,7 @@ function EditData() {
                 value={form.keterangan}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+                placeholder="(Optional)"
               ></textarea>
             </div>
 
@@ -292,6 +370,7 @@ function FormInput({ label, name, value, onChange, type = "text" }) {
         value={value ?? ""}
         onChange={onChange}
         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+        
       />
     </div>
   );

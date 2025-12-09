@@ -140,9 +140,9 @@ const DashboardContent = () => {
                 <div className="lg:col-span-2">
                     <div className="flex justify-between items-center mb-4">
                         <h3 className="text-lg font-bold text-gray-900">Analisis Kondisi</h3>
-                        <button className="text-xs font-medium text-gray-500 hover:text-gray-900 border border-gray-200 px-3 py-1 rounded transition-colors">
+                        {/* <button className="text-xs font-medium text-gray-500 hover:text-gray-900 border border-gray-200 px-3 py-1 rounded transition-colors">
                             Download PDF
-                        </button>
+                        </button> */}
                     </div>
 
                     {/* Chart Container */}

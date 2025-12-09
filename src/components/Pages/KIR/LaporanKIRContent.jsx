@@ -82,18 +82,7 @@ const LaporanKIRContent = () => {
                     </h1>
                     <p className="text-gray-500 mt-2 text-sm">Kelola data aset inventaris negara (KIB/KIR).</p>
                 </div>
-                <div className="flex flex-wrap gap-2">
-                    <button onClick={() => console.log('Export Excel')} className="text-xs md:text-sm px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
-                        <span className="mr-1 md:mr-2 text-base md:text-lg">⬇️</span> 
-                        <span className="hidden sm:inline">Export Excel Data</span>
-                        <span className="sm:hidden">Excel</span>
-                    </button>
-                    <button onClick={() => console.log('Export PDF')} className="text-xs md:text-sm px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">
-                        <span className="mr-1 md:mr-2 text-base md:text-lg">📄</span> 
-                        <span className="hidden sm:inline">Export PDF Dokumen</span>
-                        <span className="sm:hidden">PDF</span>
-                    </button>
-                </div>
+                
             </div>
 
             {/* SEARCH & ADD */}
@@ -144,7 +133,16 @@ const LaporanKIRContent = () => {
                                     <td className="border-r border-gray-100 px-3 py-3">{item.nama_barang}</td>
                                     <td className="border-r border-gray-100 px-3 py-3 text-center font-mono">{item.kode_barang}</td>
                                     <td className="border-r border-gray-100 px-3 py-3 text-center">{item.tahun}</td>
-                                    <td className="border-r border-gray-100 px-3 py-3 text-center font-semibold">{item.lokasi}</td>
+                                    <td className="border-r border-gray-100 px-3 py-3 text-center font-semibold"><span
+                                            className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                                                item.lokasi === 'aula'
+                                                    ? 'bg-red-100 text-red-800'
+                                                    : 'bg-green-100 text-green-800'
+                                                    
+                                            }`}
+                                        >
+                                            {item.lokasi}
+                                        </span></td>
                                     <td className="border-r border-gray-100 px-3 py-3 text-center">{item.kondisi}</td>
                                     <td className="border-r border-gray-100 px-3 py-3 text-center font-bold">{item.jumlah}</td>
                                     <td className="border-r border-gray-100 px-3 py-3 text-center font-bold">{item.nilai_perolehan}</td>

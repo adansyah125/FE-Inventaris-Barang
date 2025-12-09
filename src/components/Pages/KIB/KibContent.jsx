@@ -94,7 +94,7 @@ const DataIndukContent = () => {
             <div className="flex flex-col md:flex-row justify-between items-start md:items-end pb-6 border-b border-gray-100 mb-4">
                 <div>
                     <h1 className="text-2xl md:text-4xl font-light text-gray-900 tracking-tight">
-                        Data Kartu Inventaris Barang <span className="font-bold text-indigo-600">KIB</span>
+                        Data Kartu Inventaris <span className="font-bold text-indigo-600">Barang</span>
                     </h1>
                     <p className="text-gray-500 mt-2 text-sm">
                         Kelola data aset inventaris negara (KIB/KIR).
@@ -126,7 +126,7 @@ const DataIndukContent = () => {
                             {filter === item.key && (
                                 <motion.span
                                     layoutId="underline"
-                                    className="absolute left-0 -bottom-[2px] h-[2px] bg-indigo-600 w-full rounded-full"
+                                    className="absolute left-0 bottom-[2px] h-[2px] bg-indigo-600 w-full rounded-full"
                                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
                                 />
                             )}
@@ -201,6 +201,7 @@ const DataIndukContent = () => {
                                 <th className="border-r px-3 py-3 border-gray-200">No Reg</th>
                                 <th className="border-r px-3 py-3 border-gray-200">Spesifikasi</th>
                                 <th className="border-r px-3 py-3 border-gray-200">Jumlah</th>
+                                <th className="border-r px-3 py-3 border-gray-200">Lokasi</th>
                                 <th className="border-r px-3 py-3 border-gray-200">Harga Satuan</th>
                                 <th className="border-r px-3 py-3 border-gray-200">Nilai Perolehan</th>
                                 <th className="px-3 py-3">Aksi</th>
@@ -238,6 +239,18 @@ const DataIndukContent = () => {
                                     <td className="bg-gray-100 px-3 py-3 text-center">{item.no_register}</td>
                                     <td className="bg-gray-100 px-3 py-3">{item.spesifikasi}</td>
                                     <td className="bg-gray-100 px-3 py-3 text-center">{item.jumlah}</td>
+                                    <td className="bg-gray-100 px-3 py-3 text-center">
+                                         <span
+                                            className={`px-2 py-0.5 rounded-full text-xs font-medium ${
+                                                item.lokasi === 'aula'
+                                                    ? 'bg-red-100 text-red-800'
+                                                    : 'bg-green-100 text-green-800'
+
+                                            }`}
+                                        >
+                                            {item.lokasi}
+                                        </span>
+                                    </td>
                                     <td className="bg-gray-100 px-3 py-3 text-right">Rp. {formatCurrency(item.harga_satuan)}</td>
                                     <td className="bg-gray-100 px-3 py-3 text-right">{item.nilai_perolehan}</td>
 
@@ -405,7 +418,7 @@ const DataIndukContent = () => {
                 )}
             </div>
 
-            <style jsx>{`
+            {/* <style jsx>{`
                 .scrollbar-hide::-webkit-scrollbar {
                     display: none;
                 }
@@ -413,7 +426,7 @@ const DataIndukContent = () => {
                     -ms-overflow-style: none;
                     scrollbar-width: none;
                 }
-            `}</style>
+            `}</style> */}
         </>
     );
 };

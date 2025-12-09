@@ -123,7 +123,7 @@ const Sidebar = ({ activeMenuId, onMenuItemClick, onLogout, isOpen, onClose }) =
       <span>Keluar Sistem</span>
      </button>
      <p className="mt-2 text-[10px] text-indigo-200 text-center">
-      Anda login sebagai Administrator
+      Anda login sebagai {localStorage.getItem("role") || "Administrator"}
      </p>
     </div>
    </div>
