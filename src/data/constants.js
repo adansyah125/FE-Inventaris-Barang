@@ -9,5 +9,6 @@ export const MENU_ITEMS = [
   { label: "Data KIB", icon: "📦", id: "kib" },
   { label: "Data KIR", icon: "📝", id: "reports" },
   { label: "Cetak Label Aset", icon: "🖨️", id: "print_labels" },
+  { label: "laporan", icon: "📑", id: "laporan" },
   { label: "User", icon: "👤", id: "user" },
 ];

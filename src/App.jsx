@@ -18,6 +18,7 @@ import UpdateKir from "./components/Pages/KIR/UpdateKir";
 import AddUser from "./components/Pages/User/AddUser";
 import EditUser from "./components/Pages/User/UpdateUser";
 import UpdateUser from "./components/Pages/User/UpdateUser";
+import Laporan from "./components/Pages/Laporan/laporan";
 
 
 function App() {
@@ -128,7 +129,18 @@ function App() {
             </ProtectedRoute>
           }
         />
-        {/* LABEL PRINT */}
+        {/* Laporan */}
+         <Route
+          path="/laporan"
+          element={
+            <ProtectedRoute>
+              <RoleRoute roles={["admin"]} userRole={localStorage.getItem("role")}>
+              <Dashboard initialMenuId="laporan" />
+              </RoleRoute>
+            </ProtectedRoute>
+          }
+        />
+        {/* USER */}
         <Route
           path="/user"
           element={

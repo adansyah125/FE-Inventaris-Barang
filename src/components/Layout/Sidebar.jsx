@@ -28,6 +28,9 @@ const Sidebar = ({ activeMenuId, onMenuItemClick, onLogout, isOpen, onClose }) =
    case 'print_labels':
     navigate('/label');
     break;
+   case 'laporan':
+    navigate('/laporan');
+    break;
    case 'user':
     navigate('/user');
     break;
