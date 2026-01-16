@@ -11,6 +11,9 @@ const DataIndukContent = () => {
     const [filter, setFilter] = useState("all");
     const [search, setSearch] = useState("");
     const [loading, setLoading] = useState(true);
+    const [openImport, setOpenImport] = useState(false);
+const [fileName, setFileName] = useState("");
+
 
     const fetchData = async () => {
         try {
@@ -87,6 +90,10 @@ const DataIndukContent = () => {
     });
 
 
+    
+
+
+
 
     return (
          <>
@@ -136,18 +143,33 @@ const DataIndukContent = () => {
             </div>
 
             {/* SEARCH & ADD */}
-            <div className="flex flex-col md:flex-row gap-3 mb-6">
-                <input 
-                    type="text"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    placeholder="Cari data (Nama, Kode, Kategori)..."
-                    className="px-4 py-2 w-full md:w-96 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 text-sm"
-                />
-                <Link to={"/data-induk/tambah"} className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm whitespace-nowrap hover:bg-indigo-700 transition">
-                    + Tambah Data
-                </Link>
-            </div>
+           <div className="flex flex-col md:flex-row gap-3 mb-6">
+    <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Cari data (Nama, Kode, Kategori)..."
+        className="px-4 py-2 w-full md:w-96 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+    />
+
+    <div className="flex gap-2">
+        <button
+            onClick={() => setOpenImport(true)}
+            className="px-4 py-2 bg-emerald-600 text-white rounded-md text-sm hover:bg-emerald-700 transition whitespace-nowrap"
+        >
+            📥 Import Excel
+        </button>
+
+        <Link
+            to="/data-induk/tambah"
+            className="px-4 py-2 bg-indigo-600 text-white rounded-md text-sm hover:bg-indigo-700 transition whitespace-nowrap"
+        >
+            + Tambah Data
+        </Link>
+    </div>
+</div>
+
+
 
             {/* TABLE - Desktop View */}
             <div className="hidden md:block overflow-x-auto border border-gray-200 rounded-lg">
@@ -418,15 +440,64 @@ const DataIndukContent = () => {
                 )}
             </div>
 
-            {/* <style jsx>{`
-                .scrollbar-hide::-webkit-scrollbar {
-                    display: none;
-                }
-                .scrollbar-hide {
-                    -ms-overflow-style: none;
-                    scrollbar-width: none;
-                }
-            `}</style> */}
+
+{/* Modal Import */}
+            {openImport && (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+        <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-6">
+
+            <h2 className="text-lg font-semibold text-gray-800 mb-1">
+                Import Data KIB
+            </h2>
+            <p className="text-sm text-gray-500 mb-4">
+                Upload file Excel (.xlsx / .xls)
+            </p>
+
+            {/* FILE INPUT */}
+            <label className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-lg p-6 cursor-pointer hover:border-indigo-400 transition">
+                <input
+                    type="file"
+                    accept=".xlsx,.xls"
+                    className="hidden"
+                    onChange={(e) => setFileName(e.target.files[0]?.name)}
+                />
+                <span className="text-3xl mb-2">📄</span>
+                <span className="text-sm text-gray-600 text-center">
+                    {fileName || "Klik untuk memilih file Excel"}
+                </span>
+            </label>
+
+            {/* INFO */}
+            <div className="mt-4 text-xs text-gray-500">
+                <p>• Format harus sesuai template KIB</p>
+                <p>• Maksimal ukuran file 5MB</p>
+            </div>
+
+            {/* ACTION */}
+            <div className="flex justify-end gap-2 mt-6">
+                <button
+                    onClick={() => {
+                        setOpenImport(false);
+                        setFileName("");
+                    }}
+                    className="px-4 py-2 text-sm text-gray-600 hover:text-gray-800"
+                >
+                    Batal
+                </button>
+
+                <button
+                    disabled={!fileName}
+                    className={`px-4 py-2 rounded-md text-sm text-white
+                        ${fileName ? "bg-indigo-600 hover:bg-indigo-700" : "bg-gray-300 cursor-not-allowed"}
+                    `}
+                >
+                    Import
+                </button>
+            </div>
+
+        </div>
+    </div>
+)}
         </>
     );
 };

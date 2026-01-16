@@ -135,7 +135,7 @@ function App() {
           element={
             <ProtectedRoute>
               <RoleRoute roles={["admin"]} userRole={localStorage.getItem("role")}>
-              <LaporanContent initialMenuId="laporan" />
+              <Dashboard initialMenuId="laporan" />
               </RoleRoute>
             </ProtectedRoute>
           }
